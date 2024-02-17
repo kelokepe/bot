@@ -125,3 +125,4 @@ service ssh restart >/dev/null 2>&1
 ) &> /dev/null 2>&1
 
 . ${sdir[0]}/confbot.sh
+}
