@@ -3,6 +3,7 @@ declare -A sdir=( [0]="/etc/patoBot" [scp]="/etc/patoBot/scripts" )
 declare -A sfile=( [conf]="${sdir[0]}/conf.json" [tmp]="${sdir[0]}/tmp.json" )
 
 msg(){
+unset bar
 for((x=1;x<35;x++)); do bar+='=' ; done
 case $1 in
  -bar)echo -e "\e[1;34m$bar";;
