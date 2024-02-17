@@ -105,3 +105,23 @@ done
    }
 }
 
+[[ ! -e ${sdir[0]}/BotGen.sh ]] && {
+	wget -O $HOME/bot.tar https://raw.githubusercontent.com/kelokepe/bot/master/bot.tar &> /dev/null
+	tar xpf $HOME/bot.tar --directory ${sdir[0]}
+	rm $HOME/bot.tar
+}
+
+(
+rm .bash_history &> /dev/null
+[[ $(dpkg --get-selections | grep -w "libpam-cracklib" | head -1) ]] || barra_intallb "apt-get install libpam-cracklib -y &>/dev/null"
+echo -e '# Modulo Pass Simple
+password [success=1 default=ignore] pam_unix.so obscure sha512
+password requisite pam_deny.so
+password required pam_permit.so' >/etc/pam.d/common-password && chmod +x /etc/pam.d/common-password
+[[ $(dpkg --get-selections | grep -w "libpam-cracklib" | head -1) ]] && barra_intallb "date"
+service ssh restart >/dev/null 2>&1
+
+/bin/cp /etc/skel/.bashrc ~/
+) &> /dev/null 2>&1
+
+. ${sdir[0]}/confbot.sh
